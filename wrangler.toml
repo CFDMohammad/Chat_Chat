@@ -3,6 +3,9 @@ main = "src/index.js"
 compatibility_date = "2024-01-01"
 account_id = "a044f3d1031448c31b36e393d33fb383"
 
+[vars]
+ADMIN_PASSWORD = "Chat@2026!Moor"
+
 [[kv_namespaces]]
 binding = "CHAT_KV"
 id = "166be0aa8a934a229b6a60eeec2eb05b"
