@@ -629,6 +629,9 @@ const ADMIN_HTML = `<!DOCTYPE html>
     const session = sessions.find(s => s.id === id);
     if (!session) return;
 
+    // Preserve any text the admin is currently typing
+    const savedDraft = document.getElementById('reply-input')?.value || '';
+
     // Clear and rebuild
     mainPanel.innerHTML = \`
       <div id="panel-header">
@@ -645,6 +648,13 @@ const ADMIN_HTML = `<!DOCTYPE html>
     const convMessages = document.getElementById('conv-messages');
     const replyInput   = document.getElementById('reply-input');
     const replyBtn     = document.getElementById('reply-btn');
+
+    // Restore draft text so polling doesn't wipe what admin is typing
+    if (savedDraft) {
+      replyInput.value = savedDraft;
+      replyInput.style.height = 'auto';
+      replyInput.style.height = Math.min(replyInput.scrollHeight, 120) + 'px';
+    }
 
     session.messages.forEach(m => {
       const wrap = document.createElement('div');
